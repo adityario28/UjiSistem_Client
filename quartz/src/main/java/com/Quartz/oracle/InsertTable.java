@@ -8,6 +8,7 @@ import static com.Quartz.oracle.CreateTable.CreateTable;
 import static com.Quartz.oracle.CreateTable.line_map_path;
 import static com.Quartz.oracle.CreateTable.table_map_path;
 import static com.Quartz.oracle.Mapping.HashMapFromTextFile;
+import static com.Quartz.quartz.Client.send2ServiceC1;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
