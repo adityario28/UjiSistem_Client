@@ -9,9 +9,16 @@ import static com.Quartz.oracle.CreateTable.line_map_path;
 import static com.Quartz.oracle.CreateTable.table_map_path;
 import static com.Quartz.oracle.Mapping.HashMapFromTextFile;
 import static com.Quartz.quartz.Client.send2ServiceC1;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +34,10 @@ public class InsertTable {
     final static String line_map_val = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
     private static JdbcTemplate jdbcTemplate;
     
-    public static String InsertAllTable(String url, String user, String pass) throws Exception{
+    public static String InsertAllTable(String data, String url) throws Exception{
         String status = null;
         try {
-            InsertIntoTable(line_map_val,url,user,pass);
+            InsertIntoTable(data,url);
             status = "Oracle table Inserted Succesfully";
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +45,47 @@ public class InsertTable {
         return status;
     }
     
-    public static void InsertIntoTable(String data, String url, String user, String pass){
+    public static String sendtoOracle(String endpoint, String h, String v){
+        String response = "";
+        try {
+            URL url = new URL(endpoint);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            
+            Gson gson = new Gson();
+            JsonObject data = new JsonObject();
+            data.addProperty(h, v);
+            String gs= gson.toJson(data);
+            
+            OutputStream os = conn.getOutputStream();
+            os.write(gs.getBytes());
+            os.flush();
+            
+            if (conn.getResponseCode()!= HttpURLConnection.HTTP_OK){
+                throw new RuntimeException("Failed : HTPP error code : "
+                        + conn.getResponseCode());
+            }
+            
+            BufferedReader br = new BufferedReader (new InputStreamReader((conn.getInputStream())));
+            
+            String output;
+            
+            while ((output = br.readLine()) != null){
+            response = output;
+        }
+            
+            conn.disconnect();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
+    public static void InsertIntoTable(String data, String url) throws IOException{
         //Ambil data map dan key
         Map<String, String> tipe_l = HashMapFromTextFile ("map/line_map.txt");
         String key = "";
@@ -52,15 +99,6 @@ public class InsertTable {
         
         BufferedReader br = null;
         String[] files = new File(data).list();
-        
-        //Setting koneksi
-        SingleConnectionDataSource ds = new SingleConnectionDataSource();
-        //oracle
-        ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        ds.setUrl(url);
-        ds.setUsername(user);
-        ds.setPassword(pass);
-        JdbcTemplate jdbcTemplate = new JdbcTemplate( ds);
         
         try {
             for (String filename : files) {
@@ -158,11 +196,12 @@ public class InsertTable {
                     //Insert data
                     if (h != null) {
                         try {
-                            if (h.contains("HoyaItemType")){
-                                   jdbcTemplate.execute("INSERT INTO TABLESTOCK (" + h + ") VALUES (" + v + ")");
-                            } else {
-                                   jdbcTemplate.execute("INSERT INTO LINESTOCK (" + h + ") VALUES (" + v + ")");
-                            }
+                            sendtoOracle(url, h, v);
+//                            if (h.contains("HoyaItemType")){
+//                                   jdbcTemplate.execute("INSERT INTO TABLESTOCK (" + h + ") VALUES (" + v + ")");
+//                            } else {
+//                                   jdbcTemplate.execute("INSERT INTO LINESTOCK (" + h + ") VALUES (" + v + ")");
+//                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -185,7 +224,7 @@ public class InsertTable {
                 catch (Exception e) {
                 };
             }
-            ds.destroy();
+//            ds.destroy();
         }
     }
 }

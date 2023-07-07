@@ -66,8 +66,8 @@ public class Client {
         // TODO code application logic here
         // System.out.println("Test");
         try {
-            String endpointC1 = "http://localhost:68/insertData";
-            String dir = "D:\\Ujisistem_tugas\\Data-5\\All\\";
+            String endpointC1 = "http://localhost:68/insertByte";
+            String dir = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
             
             String[] files = new File(dir).list();
             List<String> listRequest = new ArrayList<>();

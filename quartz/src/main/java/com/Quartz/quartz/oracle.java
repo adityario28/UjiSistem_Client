@@ -24,14 +24,13 @@ public class oracle implements Job {
     
     public void oracle () {
         try {
-            String DB_URL = "jdbc:oracle:thin:@localhost:1523/orcl";
-            String USER = "system";
-            String PASS = "agung2002";
+            String DATA = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+            String URL = "http://localhost:68/insertByte";
             
             Date awal = new Date(System.currentTimeMillis());
 
 //            System.out.println(CreateAllTable(DB_URL,USER,PASS));
-            System.out.println(InsertAllTable(DB_URL,USER,PASS));
+                System.out.println(InsertAllTable(DATA,URL));
             Date akhir = new Date(System.currentTimeMillis());
             long waktu = (akhir.getTime() - awal.getTime());
             
