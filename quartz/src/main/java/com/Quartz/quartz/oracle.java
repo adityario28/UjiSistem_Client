@@ -24,7 +24,8 @@ public class oracle implements Job {
     
     public void oracle () {
         try {
-            String DATA = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+//            String DATA = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+            String DATA = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
             String URL = "http://localhost:68/insertByte";
             
             Date awal = new Date(System.currentTimeMillis());

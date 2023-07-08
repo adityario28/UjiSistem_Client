@@ -19,22 +19,25 @@ public class postgree implements Job {
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        postgree ();
+        postgree();
     }
-    
-    public void postgree () {
+
+    public void postgree() {
         try {
-            String DB_URL = "jdbc:postgresql://localhost:5432/public";
-            String USER = "postgres";
-            String PASS = "agung2002";
+
+//            String DB_URL = "jdbc:postgresql://localhost:5433/ujisistemc";
+//            String USER = "adityario28";
+//            String PASS = "Mahesario28.";
+            String DATA = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
+            String URL = "http://localhost:67/insertByte";
 
             Date awal = new Date(System.currentTimeMillis());
 
-            System.out.println(CreateAllTable(DB_URL,USER,PASS));
-            System.out.println(InsertAllTable(DB_URL,USER,PASS));
+//            System.out.println(CreateAllTable(DB_URL, USER, PASS));
+            System.out.println(InsertAllTable(DATA, URL));
             Date akhir = new Date(System.currentTimeMillis());
             long waktu = (akhir.getTime() - awal.getTime());
-            
+
             System.out.println("Waktu yang dibutuhkan postgree = " + waktu + " milidetik");
         } catch (Exception e) {
         }

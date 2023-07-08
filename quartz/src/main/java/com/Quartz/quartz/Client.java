@@ -38,6 +38,7 @@ public class Client {
             String input= gson.toJson(data, List.class);
             
             OutputStream os = conn.getOutputStream();
+            System.out.println(input);
             os.write(input.getBytes());
             os.flush();
             
@@ -67,7 +68,8 @@ public class Client {
         // System.out.println("Test");
         try {
             String endpointC1 = "http://localhost:68/insertByte";
-            String dir = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+//            String dir = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+            String dir = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
             
             String[] files = new File(dir).list();
             List<String> listRequest = new ArrayList<>();
