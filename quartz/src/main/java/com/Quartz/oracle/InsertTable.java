@@ -4,9 +4,7 @@
  */
 package com.Quartz.oracle;
 
-import static com.Quartz.oracle.CreateTable.CreateTable;
-import static com.Quartz.oracle.CreateTable.line_map_path;
-import static com.Quartz.oracle.CreateTable.table_map_path;
+
 import static com.Quartz.oracle.Mapping.HashMapFromTextFile;
 import static com.Quartz.quartz.Client.send2ServiceC1;
 import com.google.gson.Gson;
@@ -22,8 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+
 
 /**
  *
@@ -33,7 +30,6 @@ public class InsertTable {
     
 //    final static String line_map_val = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
     final static String line_map_val = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
-    private static JdbcTemplate jdbcTemplate;
     
     public static String InsertAllTable(String data, String url) throws Exception{
         String status = null;
