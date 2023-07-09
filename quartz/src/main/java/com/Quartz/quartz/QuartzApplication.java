@@ -34,18 +34,18 @@ public class QuartzApplication {
             //Trigger 1
             SimpleTriggerImpl postgree = new SimpleTriggerImpl("Tringgerc1");
 //            Date startTime = DateBuilder.futureDate(10, DateBuilder.IntervalUnit.SECOND); // Mengatur waktu mulai 10 detik dari sekarang
-//            trigger.setStartTime(DateBuilder.todayAt(17, 40, 0)); // Set jam jam/ menit/ detik
-//            trigger.setRepeatCount(10); //Ulang
+//            postgree.setStartTime(DateBuilder.todayAt(17, 40, 0)); // Set jam jam/ menit/ detik
+//            postgree.setRepeatCount(10); //Ulang
 //            postgree.setNextFireTime(new Date(System.currentTimeMillis())); // Tanggal
-//            trigger.setRepeatInterval(1000); //Berapa detik 1000 == 1s
+//            postgree.setRepeatInterval(1000); //Berapa detik 1000 == 1s
             
             //Trigger2
             SimpleTriggerImpl oracle = new SimpleTriggerImpl("Tringgerc2");
 //            Date startTime2 = DateBuilder.futureDate(10, DateBuilder.IntervalUnit.SECOND); // Mengatur waktu mulai 10 detik dari sekarang
-//            trigger.setStartTime(DateBuilder.todayAt(20, 33, 0)); // Set jam jam/ menit/ detik
-//            trigger.setRepeatCount(10); //Ulang
+//            oracle.setStartTime(DateBuilder.todayAt(20, 33, 0)); // Set jam jam/ menit/ detik
+//            oracle.setRepeatCount(10); //Ulang
 //            oracle.setNextFireTime(new Date(System.currentTimeMillis())); // Tanggal
-//            trigger.setRepeatInterval(1000); //Berapa detik 1000 == 1s
+//            oracle.setRepeatInterval(1000); //Berapa detik 1000 == 1s
             
             scheduler.scheduleJob(jobDetail_1, postgree);
             scheduler.scheduleJob(jobDetail_2, oracle);

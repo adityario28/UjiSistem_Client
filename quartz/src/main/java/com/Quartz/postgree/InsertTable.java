@@ -4,6 +4,7 @@
  */
 package com.Quartz.postgree;
 
+import static com.Quartz.oracle.InsertTable.sendtoOracle;
 import static com.Quartz.postgree.CreateTable.CreateTable;
 import static com.Quartz.postgree.CreateTable.line_map_path;
 import static com.Quartz.postgree.CreateTable.table_map_path;
@@ -83,7 +84,7 @@ public class InsertTable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return response;
     }
 
     public static void InsertIntoTable(String data, String url) throws IOException {
@@ -100,6 +101,11 @@ public class InsertTable {
 
         BufferedReader br = null;
         String[] files = new File(data).list();
+        
+        double waktu_row = 0;
+        double waktu_total = 0;
+        double jml_row = 0;
+        
         try{
         for (String filename : files) {
             String header = "";
@@ -190,7 +196,9 @@ public class InsertTable {
                 //Insert data
                 if (h != null) {
                     try {
-                        sendtoPostgree(url, h, v);
+                        waktu_row = Double.parseDouble(sendtoPostgree(url, h, v));
+                        waktu_total += waktu_row;
+                        jml_row += 1;
 //                            if (h.contains("HoyaItemType")){
 //                                   jdbcTemplate.execute("INSERT INTO TABLESTOCK (" + h + ") VALUES (" + v + ")");
 //                            } else {
@@ -205,6 +213,8 @@ public class InsertTable {
             bfr.close();
             reader.close();
         }
+        System.out.println("Postgree total time = " + String.format("%.9f", waktu_total) + " second");
+        System.out.println("Postgree average input time per-row = " + String.format("%.9f", waktu_total/jml_row) + " second");
     }
     catch (Exception e) {
             e.printStackTrace();

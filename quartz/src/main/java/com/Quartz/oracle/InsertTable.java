@@ -83,7 +83,7 @@ public class InsertTable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return response;
     }
     
     public static void InsertIntoTable(String data, String url) throws IOException{
@@ -100,6 +100,10 @@ public class InsertTable {
         
         BufferedReader br = null;
         String[] files = new File(data).list();
+        
+        double waktu_row = 0;
+        double waktu_total = 0;
+        double jml_row = 0;
         
         try {
             for (String filename : files) {
@@ -197,7 +201,10 @@ public class InsertTable {
                     //Insert data
                     if (h != null) {
                         try {
-                            sendtoOracle(url, h, v);
+//                            sendtoOracle(url, h, v);
+                        waktu_row = Double.parseDouble(sendtoOracle(url, h, v));
+                        waktu_total += waktu_row;
+                        jml_row += 1;
 //                            if (h.contains("HoyaItemType")){
 //                                   jdbcTemplate.execute("INSERT INTO TABLESTOCK (" + h + ") VALUES (" + v + ")");
 //                            } else {
@@ -212,6 +219,8 @@ public class InsertTable {
                 bfr.close();
                 reader.close();
             }
+            System.out.println("Oracle total time = " + String.format("%.9f", waktu_total) + " second");
+            System.out.println("Oracle average input time per-row = " + String.format("%.9f", waktu_total/jml_row) + " second");
         }
         catch (Exception e) {
             e.printStackTrace();

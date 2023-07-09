@@ -24,18 +24,18 @@ public class oracle implements Job {
     
     public void oracle () {
         try {
-//            String DATA = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
-            String DATA = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
+            String DATA = "C:\\Users\\LENOVO IP SLIM 3\\Documents\\Semester 9\\Uji Sistem\\TR UJI SISTEM\\All_Data-5\\Data-5\\ALL\\";
+//            String DATA = "D:\\Tugas\\Semester9\\Pengujian Sistem\\Data-5\\Data-5\\Full\\";
             String URL = "http://localhost:68/insertByte";
             
             Date awal = new Date(System.currentTimeMillis());
 
 //            System.out.println(CreateAllTable(DB_URL,USER,PASS));
                 System.out.println(InsertAllTable(DATA,URL));
-            Date akhir = new Date(System.currentTimeMillis());
-            long waktu = (akhir.getTime() - awal.getTime());
-            
-            System.out.println("Waktu yang dibutuhkan oracle = " + waktu + " milidetik");
+//            Date akhir = new Date(System.currentTimeMillis());
+//            long waktu = (akhir.getTime() - awal.getTime());
+//            
+//            System.out.println("Waktu yang dibutuhkan oracle = " + waktu + " milidetik");
         } catch (Exception e) {
         }
     }
